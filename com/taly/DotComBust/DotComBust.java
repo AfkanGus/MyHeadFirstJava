@@ -9,13 +9,19 @@ import java.util.ArrayList;
 public class DotComBust {
 	// объявляем и инициализируем переменные, которые нам понадобятся
 	private GameHelper helper = new GameHelper();
-	private ArrayList<DotCom> dotComList = new ArrayList<>(3);
+	// создаем ArrayList только для объектов DotCom
+	private ArrayList<DotCom> dotComList = new ArrayList<>();
 	private int numOfGuesses = 0;
 
 	public static void main(String[] args) {
-		DotComBust dotComBust = new DotComBust();
-
-	}
+		DotComBust game = new DotComBust(); //создаем игровой объект
+		game.setUpGame(); // говорим игровому объекту подготовить игру
+		/*
+		говорим игровому объекту начать главный игровой цикл
+		(продолжаем запрашивать пользовательский ввод и проверять полученные данные)
+		 */
+		game.startPlaying();
+	} //конец метода
 
 	private void setUpGame(){
 		// создадим несколько сайтов и присвоим им адреса
@@ -44,15 +50,17 @@ public class DotComBust {
 			от вспомогательного объекта
 			 */
 			dotComToSet.setLocationCells(newLocation);
-		}
-	}
+		} // конец for
+	} // конец метода
+
 	private void startPlaying(){
 		while (!dotComList.isEmpty()){ //до тех пор, пока список объектов DotCom не станет пустым
 			String userGuess = helper.getUserInput("Сделайте ход"); // Получаем пользовательский ввод
 			checkUserGuess(userGuess); // вызываем наш метод checkUserGuess
-		}
+		} // конец while
 		finishGame(); // вызываем наш метод finishGame
-	}
+	} // конец метода
+
 	private void checkUserGuess(String userGuess){
 		numOfGuesses++; // инкрементируем количество попыток, которые сделал пользователь
 		String result = "Мимо"; // Подразумеваем промах, пока не выяснили обратного
@@ -69,10 +77,19 @@ public class DotComBust {
 				dotComList.remove(dotComToTest);
 				break;
 			}
-		}
+		} // конец for
 		System.out.println(result); // выводим для пользователя результат
-	}
-	private void finishGame(){
+	} // конец метода
 
-	}
-}
+	private void finishGame(){
+		// выводим сообщение о том, как пользователь прошел игру
+		System.out.println("Все \"сайты\" ушли ко дну! Ваши акции теперь ничего не стоят.");
+		if (numOfGuesses <= 18) {
+			System.out.println("Это заняло у вас всего " + numOfGuesses + " попыток.");
+			System.out.println("Вы успели выбраться до того, как ваши вложения утонули.");
+		} else {
+			System.out.println("Это заняло у вас довольно много времени. " + numOfGuesses + " попыток.");
+			System.out.println("Рыбы водят хороводы вокруг ваших вложений");
+		}
+	} // конец метода
+} // конец класса
