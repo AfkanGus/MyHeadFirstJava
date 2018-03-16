@@ -21,13 +21,13 @@ public class InnerButton {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		b = new JButton("A");
-		b.addActionListener(new BListener()); //***
+		b.addActionListener(new BListener()); //*** добавляем слушателя к кнопке
 
 		frame.getContentPane().add(BorderLayout.SOUTH, b);
 		frame.setSize(200, 100);
 		frame.setVisible(true);
 	}
-	class BListener implements ActionListener{ //***
+	class BListener implements ActionListener{ //*** реализуем интерфейс
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (b.getText().equals("A")) {
