@@ -7,16 +7,15 @@ import java.awt.*;
  * Created by Taly on 16.03.2018.
  */
 public class SimpleAnimation {
-	private int x = 70;
-	private int y = 70;
-	private int z = 40;
+	private int x = 0;
+	private int y = 0;
 
 	public static void main(String[] args) {
 		SimpleAnimation gui = new SimpleAnimation();
 		gui.go();
 	}
 
-	public void go(){
+	public void go() {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MyDrawPanel panel = new MyDrawPanel();
@@ -28,20 +27,20 @@ public class SimpleAnimation {
 		for (int i = 0; i < 130; i++) {
 			x++;
 			y++;
-
-				panel.repaint();
+			panel.repaint();
 			try {
 				Thread.sleep(50);
-			} catch (Exception e){}
+			} catch (Exception e) {
+			}
 		} // end for
 
 	} //end go()
 
-	class MyDrawPanel extends JPanel{
+	class MyDrawPanel extends JPanel {
 		@Override
 		public void paintComponent(Graphics g) {
 			g.setColor(Color.WHITE);
-			g.fillRect(0,0,this.getWidth(), this.getHeight()); // залить весь прямоугольник панели белым цветом
+			g.fillRect(0, 0, this.getWidth(), this.getHeight()); // залить весь прямоугольник панели белым цветом
 			// при каждой отрисовке
 			g.setColor(Color.BLUE);
 			g.fillOval(x, y, 70, 70);
