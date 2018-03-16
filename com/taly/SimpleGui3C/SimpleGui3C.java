@@ -9,12 +9,12 @@ import java.awt.event.ActionListener;
  * Created by Taly on 15.03.2018.
  */
 public class SimpleGui3C implements ActionListener {
-	JFrame frame;
-	JButton button;
-	int count;
+	private JFrame frame;
+	private JButton button;
+	private static int count;
 
 	public class MyDrawPanel extends JPanel{
-		public void paintComponent(Graphics g){
+		public void paintComponent(Graphics g){ // метод вызывается при каждом нажатии кнопки методом repain()
 
 			Graphics2D g2d = (Graphics2D) g;
 
@@ -52,18 +52,18 @@ public class SimpleGui3C implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		button = new JButton("Click");
-		button.addActionListener(this);
+		button.addActionListener(this); //добавляем слушателя (this) к кнопке
 
 		MyDrawPanel panel = new MyDrawPanel();
 
-		frame.getContentPane().add(BorderLayout.SOUTH, button);
-		frame.getContentPane().add(BorderLayout.CENTER, panel);
+		frame.getContentPane().add(BorderLayout.SOUTH, button); // добавляем виджеты - кнопку и панель
+		frame.getContentPane().add(BorderLayout.CENTER, panel); // в две области фрейма
 		frame.setSize(300, 300);
 		frame.setVisible(true);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // при нажатии кнопки вызываем для фрейма метод repaint()
 		frame.repaint();
 		button.setText("Clicked!!! " + (++count));
 	}
