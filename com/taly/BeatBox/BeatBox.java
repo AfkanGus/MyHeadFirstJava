@@ -54,6 +54,16 @@ public class BeatBox {
 		downTempo.addActionListener(new MyDownTempoListener());
 		buttonBox.add(downTempo);
 
+		JButton setRandom = new JButton("Set Random");
+		setRandom.addActionListener(new SetRandomListener());
+		buttonBox.add(setRandom);
+
+		JButton clear = new JButton("Clear");
+		clear.addActionListener(new ClearListener());
+		buttonBox.add(clear);
+
+
+
 		Box nameBox = new Box(BoxLayout.Y_AXIS);
 		for (int i = 0; i < 16; i++) {
 			nameBox.add(new Label(instrumentNames[i]));
@@ -163,6 +173,30 @@ public class BeatBox {
 			sequencer.setTempoFactor((float) (tempoFactor * .97));
 		}
 	}// закрываем внутренний класс
+
+	public class ClearListener implements ActionListener{ //сброс установленных флажков
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for (int i = 0; i < 256; i++) {
+				checkBoxList.get(i).setSelected(false);
+			}
+		}
+	}
+
+	public class SetRandomListener implements ActionListener{ // произвольная установка флажков
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for (int i = 0; i < 256; i++) {
+				int onOff = (int) (Math.random() * 2);
+				System.out.println(i + " = " + onOff);
+				if (onOff == 1) {
+					checkBoxList.get(i).setSelected(true);   // присваиваем значение - не установлен
+				} else {
+					checkBoxList.get(i).setSelected(false);   // присваиваем значение - не установлен
+				}
+			}
+		}
+	}
 
 	/*
 	Метод создает события для одного инструмента за каждый проход цикла для всех 16 тактов.
