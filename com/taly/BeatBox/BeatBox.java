@@ -97,8 +97,8 @@ public class BeatBox {
 		try { // получаем синтезатор, секвенсор и дорожки
 			sequencer = MidiSystem.getSequencer();
 			sequencer.open();
-			sequence = new Sequence(Sequence.PPQ, 4);
-			track = sequence.createTrack();
+			sequence = new Sequence(Sequence.PPQ, 4); // создадим последовательность
+			track = sequence.createTrack(); // создадим трек и свяжем его с последовательностью
 			sequencer.setTempoInBPM(120);
 		} catch (Exception e){
 			e.printStackTrace();
