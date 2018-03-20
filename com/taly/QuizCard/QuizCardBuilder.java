@@ -27,6 +27,7 @@ public class QuizCardBuilder {
 	public void go(){
 		// формируем GUI
 		frame = new JFrame("Quiz Card Builder");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel mainPanel = new JPanel();
 		Font bigFont = new Font("sanserif", Font.BOLD, 24);
 		question = new JTextArea(6, 20);

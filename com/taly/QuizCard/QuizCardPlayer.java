@@ -30,6 +30,7 @@ public class QuizCardPlayer {
 	public void go(){
 		// формируем GUI
 		frame = new JFrame("Quiz Card Player");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel mainPanel = new JPanel();
 		Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
@@ -54,7 +55,7 @@ public class QuizCardPlayer {
 		menuBar.add(fileMenu);
 		frame.setJMenuBar(menuBar);
 		frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-		frame.setSize(640, 500);
+		frame.setSize(500, 500);
 		frame.setVisible(true);
 
 	} // end go()
@@ -116,6 +117,4 @@ public class QuizCardPlayer {
 		nextButton.setText("Show Answer");
 		isShowAnswer = true;
 	}
-
-
 }
