@@ -1,0 +1,43 @@
+package com.taly.DungeonTest;
+
+import java.io.*;
+
+/**
+ * Created by Taly on 21.03.2018.
+ */
+class DungeonGame implements Serializable {
+	public int x = 3;
+	transient long y = 4;
+	private short z = 5;
+
+	public int getX() {
+		return x;
+	}
+
+	public long getY() {
+		return y;
+	}
+
+	public short getZ() {
+		return z;
+	}
+}
+
+class DungeonTest {
+	public static void main(String[] args) {
+		DungeonGame d = new DungeonGame(); // создали объект
+		try {
+			FileOutputStream fos = new FileOutputStream("dg.ser"); // соединились с файлом вывода
+			ObjectOutputStream oos = new ObjectOutputStream(fos); // создали цепочку потока вывода
+			oos.writeObject(d); // записали объект в поток
+			System.out.println(d.getX() + d.getY() + d.getZ()); // вывод значений (3 + 4 + 5 = 12), но 4 не записывается
+			oos.close(); // закрыли поток
+			FileInputStream fis = new FileInputStream("dg.ser"); // соединились с файлом ввода
+			ObjectInputStream ois = new ObjectInputStream(fis); // создали цепочку потока ввода
+			d = (DungeonGame) ois.readObject(); // прочитали обект из потока ввода и привели его к виду класса
+			System.out.println(d.getX() + d.getY() + d.getZ()); // вывод значений (3 + 5 = 8). 4 не (деK)сериализуется
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
