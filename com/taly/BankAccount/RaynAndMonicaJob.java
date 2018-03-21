@@ -38,7 +38,7 @@ public class RaynAndMonicaJob implements Runnable{
         }
     }
 
-    private void makeWithdrawal(int amount){
+    private synchronized void makeWithdrawal(int amount){
         if (account.getBalance() >= amount) {
             System.out.println(Thread.currentThread().getName() + " собирается снять деньги");
             try {
