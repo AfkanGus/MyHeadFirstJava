@@ -9,7 +9,7 @@ import java.net.Socket;
  * Created by Taly on 21.03.2018.
  */
 public class DailyAdviceServer {
-	String[] asviceList = {"Ешьте меньшими порциями", "Купите облегающие джинсы. Нет, они не делают вас" +
+	String[] adviceList = {"Ешьте меньшими порциями", "Купите облегающие джинсы. Нет, они не делают вас" +
 			"полнее", "Два слова: не годится", "Будьте честны хотя бы сегодня. Скажите своему начальнику" +
 			"все, что вы *на самом деле* о нем думаете", "Возможно, вам стоит подобрать другую прическу"};
 
@@ -31,8 +31,8 @@ public class DailyAdviceServer {
 	}
 
 	private String getAdvice(){
-		int random = (int)(Math.random() * asviceList.length);
-		return asviceList[random];
+		int random = (int)(Math.random() * adviceList.length);
+		return adviceList[random];
 	}
 
 	public static void main(String[] args) {
