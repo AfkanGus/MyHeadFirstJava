@@ -1,10 +1,15 @@
 package com.taly.BeatBox;
 
+import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
+import javafx.stage.FileChooser;
+
 import javax.sound.midi.*;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -61,6 +66,14 @@ public class BeatBox {
 		JButton clear = new JButton("Clear");
 		clear.addActionListener(new ClearListener());
 		buttonBox.add(clear);
+
+		JButton serialiseIt = new JButton("SerialiseIt");
+		serialiseIt.addActionListener(new MySentListener());
+		buttonBox.add(serialiseIt);
+
+		JButton restore = new JButton("Restore");
+		restore.addActionListener(new MyReadInListener());
+		buttonBox.add(restore);
 
 
 
@@ -223,5 +236,55 @@ public class BeatBox {
 			e.printStackTrace();
 		}
 		return event;
+	}
+
+	public class MySentListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			boolean [] checkboxState = new boolean[256];
+			for (int i = 0; i < 256; i++) {
+				JCheckBox check = (JCheckBox) checkBoxList.get(i);
+				if (check.isSelected()) {
+					checkboxState[i] = true;
+				}
+			}
+			try{
+				JFileChooser fileSave = new JFileChooser();
+				fileSave.showSaveDialog(theFrame);
+				//fileSave.setFileFilter(new FileNameExtensionFilter("Serialization data","ser"));
+				FileOutputStream fileStream = new FileOutputStream(fileSave.getSelectedFile());
+				ObjectOutputStream os = new ObjectOutputStream(fileStream);
+				os.writeObject(checkboxState);
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	public class MyReadInListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			boolean[] checkboxState = null;
+			try{
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.showOpenDialog(theFrame);
+				//fileChooser.setFileFilter(new FileNameExtensionFilter("Serialization data","ser"));
+				FileInputStream fileIn = new FileInputStream(fileChooser.getSelectedFile());
+				ObjectInputStream is = new ObjectInputStream(fileIn);
+				checkboxState = (boolean[]) is.readObject();
+			} catch (Exception ex){
+				ex.printStackTrace();
+			}
+			for (int i = 0; i < 256; i++) {
+				JCheckBox check = (JCheckBox) checkBoxList.get(i);
+				if (checkboxState[i]){
+					check.setSelected(true);
+				} else {
+					check.setSelected(false);
+				}
+			}
+			sequencer.stop();
+			buildTrackAndStart();
+		}
 	}
 } // закрываем класс

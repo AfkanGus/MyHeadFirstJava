@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class QuizCardPlayer {
 	private JTextArea display;
-	private JTextArea answer;
+	//private JTextArea answer;
 	private ArrayList<QuizCard> cardList;
 	private int currentCardIndex;
 	private JFrame frame;
