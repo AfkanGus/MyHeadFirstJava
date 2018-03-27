@@ -1,5 +1,7 @@
 package com.taly.Jukebox1;
 
+import com.taly.Jukebox3.Song;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -18,8 +20,6 @@ public class Jukebox1 {
 
 	public void go(){
 		getSong();
-		System.out.println(songList);
-		Collections.sort(songList);
 		System.out.println(songList);
 	}
 
