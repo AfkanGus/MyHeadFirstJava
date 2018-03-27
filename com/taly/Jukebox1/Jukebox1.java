@@ -1,12 +1,10 @@
 package com.taly.Jukebox1;
 
-import com.taly.Jukebox3.Song;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 /**
  * Created by Taly on 27.03.2018.
