@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Taly on 27.03.2018.
@@ -17,6 +18,8 @@ public class Jukebox1 {
 
 	public void go(){
 		getSong();
+		System.out.println(songList);
+		Collections.sort(songList);
 		System.out.println(songList);
 	}
 
